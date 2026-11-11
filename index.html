@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude and GitHub Setup</title>
+<meta name="description" content="Student guide to connecting Claude Code, Cowork, Claude Code on the web, and the UT AI Hub to GitHub, and asking GitHub Copilot to build things.">
+<style>
+:root{--ink:#1f1f1f;--muted:#595959;--accent:#a34e00;--rule:#e2ddd5;--code-bg:#f4f1ec;--bg:#fffdf9;--panel:#ffffff}
+@media (prefers-color-scheme:dark){:root{--ink:#ece9e4;--muted:#b0aaa2;--accent:#ff9b3d;--rule:#3a3632;--code-bg:#26231f;--bg:#181614;--panel:#1f1c19}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 Georgia,"Times New Roman",serif}
+main{max-width:820px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:2.1rem;line-height:1.2;margin:0 0 .3rem}
+h2{font-size:1.45rem;margin:2.6rem 0 .6rem;padding-top:.4rem;border-top:3px solid var(--accent)}
+h3{font-size:1.15rem;margin:1.8rem 0 .4rem}
+.byline{color:var(--muted);margin-top:0}
+a{color:var(--accent)}
+code{font:0.88em/1.4 Consolas,Menlo,monospace;background:var(--code-bg);padding:.1em .3em;border-radius:4px;overflow-wrap:anywhere}
+pre{background:var(--code-bg);padding:12px 14px;border-radius:6px;white-space:pre-wrap;border-left:4px solid var(--accent)}
+pre code{background:none;padding:0;font-size:.9rem;overflow-wrap:anywhere}
+.table-wrap{overflow-x:auto;margin:1rem 0}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+caption{text-align:left;font-weight:bold;padding-bottom:.4rem}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.skip{position:absolute;left:-9999px}.skip:focus{left:12px;top:12px;background:var(--panel);padding:8px 12px;z-index:10}
+th,td{border:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+figure{margin:.9rem 0 1.2rem}
+figure img{max-width:100%;height:auto;border-radius:6px;display:block}
+figcaption{font-style:italic;color:var(--muted);font-size:.92rem;margin-top:.35rem}
+ul.checklist{list-style:none;padding-left:0}
+ul.checklist li::before{content:"\2610  ";font-size:1.1em}
+li{margin:.3rem 0}
+.table-wrap:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<main id="content">
+<h1>Student Guide: Claude and GitHub Setup</h1>
+<p class="byline">November 11, 2026 · <strong>Written by Claude and Hilary Havens</strong></p>
+<p>This guide shows you how to connect each Claude tool we use in class to GitHub, so that your work ends up in a GitHub repository and, if you like, on a public website. Everyone starts with Part 1 (a GitHub account and a repository). Then follow only the part for the tool you are using.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="The Claude tools in this guide and how each reaches GitHub"><table>
+<caption>The Claude tools in this guide and how each reaches GitHub</caption>
+<thead><tr><th scope="col">Tool</th><th scope="col">Where it runs</th><th scope="col">What you need</th><th scope="col">How work reaches GitHub</th><th scope="col">Part</th></tr></thead>
+<tbody>
+<tr><td>Claude Code</td><td>A terminal on your own computer</td><td>Claude Pro ($20/month)</td><td>Claude runs git and gh for you, with your approval</td><td>2</td></tr>
+<tr><td>Claude Cowork</td><td>The Claude Desktop app, or claude.ai in a browser</td><td>Claude Pro</td><td>You upload with GitHub Desktop or github.com</td><td>3</td></tr>
+<tr><td>Claude Code on the web</td><td>claude.ai/code in any browser</td><td>Claude Pro</td><td>Claude pushes a branch; you merge a pull request</td><td>4</td></tr>
+<tr><td>UT AI Hub</td><td>aihub.tennessee.edu in any browser</td><td>Your UT Microsoft account</td><td>You copy Claude's output into github.com, or into a request for GitHub Copilot</td><td>5 and 6</td></tr>
+</tbody>
+</table></div>
+<p>If you can, use Claude Code, Cowork, or Claude Code on the web: Claude does more of the GitHub work for you. If you can't buy a Claude subscription, the UT AI Hub works too, but you will do the copying and uploading yourself. Part 6 shows how to hand a Claude-written request to GitHub's own assistant so GitHub builds it for you.</p>
+<p>The screenshots in the separate guides are for reference. If your screen looks a little different, the site or app has probably been updated: look for the same button names.</p>
+
+<h2>Part 1: Your GitHub account and repository (everyone)</h2>
+<p>Every tool in this guide saves your work to a GitHub repository, so everyone does these steps first. They take about 10 minutes and need only a browser.</p>
+<h3>Make a GitHub account</h3>
+<ol>
+<li>Go to <a href="https://github.com/signup">github.com/signup</a> and create a free account. Choose a username you are happy to have in a public web address: your sites will live at <code>https://YOUR-USERNAME.github.io/...</code>.</li>
+<li>Confirm your email address when GitHub asks.</li>
+</ol>
+<h3>Make a repository</h3>
+<p>A repository ("repo") is a project folder that GitHub stores and keeps a history of. The examples in this guide use a repository named <code>dh_class</code>, but yours can have any name.</p>
+<ol>
+<li>Sign in at <a href="https://github.com">github.com</a>, click <strong>+</strong> at the top right, and choose <strong>New repository</strong>.</li>
+<li>Type a name under <strong>Repository name</strong>.</li>
+<li>Set <strong>Choose visibility</strong> to <strong>Public</strong>. (GitHub Pages websites on free accounts need a public repository.)</li>
+<li>Switch <strong>Add README</strong> to <strong>On</strong>, and click <strong>Create repository</strong>.</li>
+</ol>
+<p>Your repository is public, so anyone with the link can see it. Do not put your address, phone number, student ID, or anything else private in it.</p>
+<h3>Upload files on github.com</h3>
+<p>You can always add files without any other app:</p>
+<ol>
+<li>Open your repository and click <strong>Add file &gt; Upload files</strong>.</li>
+<li>Drag in your files and click <strong>Commit changes</strong>.</li>
+<li>To replace a file later, upload the new version with the same name. GitHub keeps the old version in its history.</li>
+</ol>
+<p>To make a single new file by pasting text (useful with the UT AI Hub in Part 5), click <strong>Add file &gt; Create new file</strong>, type the file name (for example, <code>index.html</code>), paste the text into the large box, and click <strong>Commit changes</strong>.</p>
+<h3>Optional: GitHub Desktop (Mac and Windows)</h3>
+<p>GitHub Desktop is a free app that keeps a folder on your computer in step with your GitHub repository. Parts 3 and 4 use it.</p>
+<ol>
+<li>Download it from <a href="https://desktop.github.com">desktop.github.com</a>, install it, and open it.</li>
+<li>Click <strong>Sign in to GitHub.com</strong>, log in in the browser window that opens, and click <strong>Authorize</strong>. Back in GitHub Desktop, accept the suggested name and email.</li>
+<li>To get an existing repository onto your computer, choose <strong>File &gt; Clone repository</strong>, pick it, and click <strong>Clone</strong>.</li>
+<li>After files change on your computer: open GitHub Desktop, type a short note in the <strong>Summary</strong> box at the bottom left, click <strong>Commit to main</strong>, then click <strong>Push origin</strong>.</li>
+<li>After files change on GitHub (for example, after you merge a pull request): click <strong>Fetch origin</strong>, then <strong>Pull origin</strong>.</li>
+</ol>
+<h3>Publish a website with GitHub Pages</h3>
+<p>Any repository with an <code>index.html</code> file in its top level can become a public website.</p>
+<ol>
+<li>On github.com, open your repository and click <strong>Settings</strong>, then <strong>Pages</strong> in the left menu.</li>
+<li>Under <strong>Build and deployment</strong>, set <strong>Source</strong> to <strong>Deploy from a branch</strong>, choose <strong>main</strong> and <strong>/ (root)</strong>, and click <strong>Save</strong>.</li>
+<li>Wait one or two minutes, then refresh the Pages screen. It shows your site's address, <code>https://YOUR-USERNAME.github.io/REPOSITORY-NAME/</code>. If the address shows a 404 page, wait two minutes and refresh again.</li>
+</ol>
+<p>Every time you change a file on the main branch, GitHub rebuilds the site within a minute or two.</p>
+
+<h2>Part 2: Claude Code (terminal) + GitHub</h2>
+<p>Claude Code connects to GitHub through two command-line tools, <code>git</code> and <code>gh</code>, signed in once with your account. After that, Claude runs the GitHub commands for you and asks permission before each one. These steps assume Claude Code is already installed (see the <a href="https://hilaryhavens.github.io/claude-code-setup-guide/">Claude Code setup guide</a>).</p>
+<h3>Install Git and the GitHub CLI</h3>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Commands to install Git and the GitHub CLI"><table>
+<caption>Commands to install Git and the GitHub CLI</caption>
+<thead><tr><th scope="col">System</th><th scope="col">Install command</th></tr></thead>
+<tbody>
+<tr><td>macOS</td><td><code>xcode-select --install</code> (gives Git), then, once Homebrew is installed, <code>brew install gh</code></td></tr>
+<tr><td>Windows</td><td><a href="https://git-scm.com/downloads">Git for Windows</a> (accept every default), then <code>winget install --id GitHub.cli</code></td></tr>
+<tr><td>Linux / Chromebook / WSL</td><td><code>sudo apt install -y git</code>, then follow <a href="https://github.com/cli/cli/blob/trunk/docs/install_linux.md">GitHub's Linux install steps</a> for <code>gh</code></td></tr>
+</tbody>
+</table></div>
+<p>Mac students without Homebrew can download the <code>gh</code> installer from <a href="https://cli.github.com">cli.github.com</a> instead. Close and reopen the terminal, then confirm both work:</p>
+<pre><code>git --version
+gh --version</code></pre>
+<p>Any version number means it worked.</p>
+<h3>Connect to GitHub</h3>
+<p>This is the same on every system.</p>
+<ol>
+<li>Sign in to GitHub from the terminal:
+<pre><code>gh auth login</code></pre>
+Choose <strong>GitHub.com</strong>, then <strong>HTTPS</strong>, answer <strong>Yes</strong> to "Authenticate Git with your GitHub credentials," and pick <strong>Login with a web browser</strong>. Copy the one-time code shown, press Enter, and paste the code into the browser page. If no browser opens, go to <a href="https://github.com/login/device">github.com/login/device</a> yourself.</li>
+<li>Tell Git who you are (use the email on your GitHub account):
+<pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre></li>
+<li>Check the connection:
+<pre><code>gh auth status</code></pre>
+It should say "Logged in to github.com account (your username)."</li>
+</ol>
+<h3>Ask Claude to save and publish</h3>
+<p>Start Claude from your course folder (<code>claude</code>), build something, then ask in plain English:</p>
+<ul>
+<li><code>Commit this to a new git repository. Then create a public GitHub repository called my-first-site and push it.</code></li>
+<li><code>Turn on GitHub Pages for this repository from the main branch, and tell me the website address.</code></li>
+<li><code>Commit and push this change.</code></li>
+</ul>
+<p>You don't type the commands below; Claude proposes them. Knowing what they mean helps you decide whether to approve them.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Commands Claude will propose, and what each one does"><table>
+<caption>Commands Claude will propose, and what each one does</caption>
+<thead><tr><th scope="col">You will see</th><th scope="col">What it does</th></tr></thead>
+<tbody>
+<tr><td><code>git init</code></td><td>Starts tracking changes in this folder</td></tr>
+<tr><td><code>git add</code> and <code>git commit -m "..."</code></td><td>Saves a snapshot of your files, with a short note</td></tr>
+<tr><td><code>gh repo create my-first-site --public --source=. --push</code></td><td>Creates the repository on GitHub and uploads your files</td></tr>
+<tr><td><code>gh api repos/.../pages ...</code></td><td>Turns on GitHub Pages for the repository</td></tr>
+<tr><td><code>git push</code></td><td>Uploads your latest snapshot to GitHub</td></tr>
+</tbody>
+</table></div>
+<p>To work on a repository you already made on github.com, ask Claude: <code>Clone my repository YOUR-USERNAME/dh_class into this folder.</code></p>
+
+<h2>Part 3: Claude Cowork + GitHub</h2>
+<p>Cowork writes files into your course folder; a second app uploads them to GitHub, so you stay in charge of every upload. Anthropic doesn't document a way for Cowork to save to GitHub on its own. These steps assume Cowork is set up with your course folder connected (see the <a href="https://hilaryhavens.github.io/cowork-setup-guide/">Cowork setup guide</a>).</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="How each system uploads Cowork's files to GitHub"><table>
+<caption>How each system uploads Cowork's files to GitHub</caption>
+<thead><tr><th scope="col">System</th><th scope="col">Upload to GitHub with</th></tr></thead>
+<tbody>
+<tr><td>macOS, Windows</td><td>GitHub Desktop</td></tr>
+<tr><td>Linux, Chromebook</td><td>The github.com website</td></tr>
+</tbody>
+</table></div>
+<h3>macOS and Windows: GitHub Desktop</h3>
+<ol>
+<li>Install GitHub Desktop and sign in (Part 1).</li>
+<li>Choose <strong>File &gt; Add local repository</strong>, click <strong>Choose…</strong>, and pick your <code>dh_class</code> folder. GitHub Desktop says the folder isn't a repository yet: click <strong>create a repository</strong>, then <strong>Create repository</strong>.</li>
+<li>Click <strong>Publish repository</strong>. Uncheck <strong>Keep this code private</strong> if you'll publish a website from it, then click <strong>Publish repository</strong> again.</li>
+<li>From now on, after Cowork changes files, open GitHub Desktop. Your changed files appear on the <strong>Changes</strong> tab. Type a short note in the <strong>Summary</strong> box, click <strong>Commit to main</strong>, then click <strong>Push origin</strong>.</li>
+</ol>
+<p>If you already made the repository on github.com in Part 1, use <strong>File &gt; Clone repository</strong> instead of steps 2 and 3, and connect the cloned folder to Cowork.</p>
+<h3>Linux and Chromebook: github.com</h3>
+<ol>
+<li>Make a repository on github.com (Part 1).</li>
+<li>Click <strong>Add file &gt; Upload files</strong>, drag in the files Claude made (Chromebook: the files you downloaded from Cowork's <strong>Outputs</strong>), and click <strong>Commit changes</strong>.</li>
+</ol>
+<h3>Reading a repository in Cowork or chat</h3>
+<p>Claude can also read a GitHub repository: in a chat, click <strong>+</strong> and choose <strong>Add from GitHub</strong>. This copies the files in for Claude to look at, but Claude can't save changes back that way.</p>
+<p>To publish a website from Cowork's files, ask Cowork for a one-file page called <code>index.html</code>, upload it, and turn on GitHub Pages (Part 1).</p>
+
+<h2>Part 4: Claude Code on the web + GitHub</h2>
+<p>Claude Code on the web works on a copy of your GitHub repository in the cloud, from any browser, with nothing installed. You connect GitHub once; Claude then pushes its changes to a new branch, and you merge them. You need a Claude Pro account and a repository (Part 1). Full screenshots are in the <a href="https://hilaryhavens.github.io/claude-code-web-setup-guide/">web setup guide</a>.</p>
+<h3>Connect GitHub (once)</h3>
+<ol>
+<li>Go to <a href="https://claude.ai/code">claude.ai/code</a> and sign in with your own Pro account. If you see "Claude Code isn't available on your account," click <strong>Switch organization</strong> or sign in with your own account.</li>
+<li>Click <strong>Connect GitHub</strong> when Claude asks. If it doesn't ask, open the <strong>Repo</strong> menu and click <strong>Install the Claude GitHub App</strong>.</li>
+<li>GitHub asks <strong>Where do you want to install Claude?</strong> Sign in if asked, then click your own username.</li>
+<li>On the <strong>Install &amp; Authorize Claude</strong> page, choose <strong>Only select repositories</strong>, click <strong>Select repositories</strong>, and pick your repository.</li>
+<li>Click <strong>Install &amp; Authorize</strong>. If GitHub asks you to <strong>Confirm access</strong>, type your GitHub password and click <strong>Confirm</strong>. GitHub sends you back to Claude.</li>
+</ol>
+<p>"Only select repositories" means Claude can see and change only the repositories you pick.</p>
+<h3>Choose a repository and run a task</h3>
+<ol>
+<li>Below the message box, click <strong>Repo</strong> and pick your repository. Leave the branch on <strong>main</strong>, the environment on <strong>Auto</strong>, and the permission mode on <strong>Auto</strong>.</li>
+<li>Type a request, for example: <code>Add a file called hello.md that says "Hello from Claude Code on the web."</code></li>
+<li>Claude works in the cloud and pushes its work to a new branch (a name like <code>claude/bold-bohr-accbkk</code>). Your main branch is not touched.</li>
+<li>The right panel shows <strong>Changes</strong> with counts like +1 −0. Click the counts to see exactly what changed.</li>
+<li>If you're happy, click <strong>Create PR</strong> (or tell Claude "yes, open a pull request").</li>
+<li>On GitHub, open the pull request and click <strong>Merge pull request</strong>, then <strong>Confirm merge</strong>. The change is now on main, and GitHub Pages (if it's on) rebuilds your site.</li>
+<li>To get the change onto your computer, open GitHub Desktop and click <strong>Fetch origin</strong>, then <strong>Pull origin</strong>.</li>
+</ol>
+<p>You can close the browser tab while Claude works; come back to the session from claude.ai/code.</p>
+<h3>Changing access later</h3>
+<ul>
+<li><strong>Add or remove repositories:</strong> on GitHub, open <strong>Settings → Applications → Installed GitHub Apps</strong>, click <strong>Configure</strong> next to Claude, and change the list.</li>
+<li><strong>Disconnect GitHub:</strong> go to <a href="https://claude.ai/customize/connectors">claude.ai/customize/connectors</a> and disconnect GitHub.</li>
+</ul>
+<p>If Claude says it couldn't push (a "403" error and a <strong>Connect GitHub</strong> button), the app isn't installed on that repository. Your work is safe in the session: add the repository to the app, then tell Claude "I installed the app, please push again."</p>
+
+<h2>Part 5: The UT AI Hub + GitHub</h2>
+<p>The <a href="https://aihub.tennessee.edu/">UT AI Hub</a> gives active UT students, faculty, and staff private access to Claude and other AI models through the university. It is a chat in your browser: it has no GitHub connection, so Claude can't save anything to GitHub for you. Instead, you ask Claude to give you finished files and step-by-step upload instructions, and you copy them into GitHub yourself. It takes more work than Parts 2 to 4, but the result is the same: a repository and, if you like, a website.</p>
+<p>I couldn't see the Hub's own screens while writing this, so these steps follow <a href="https://oit.utk.edu/ai/aihub/aihub-guide/">OIT's AI Hub guide</a>. If a button name differs, look for the closest match.</p>
+<h3>Sign in and choose Claude</h3>
+<ol>
+<li>Go to <a href="https://aihub.tennessee.edu/">aihub.tennessee.edu</a> and sign in with your UT Microsoft account (your UT email and password).</li>
+<li>Open the model drop-down list at the top of the chat and choose <strong>Anthropic Claude Sonnet</strong>. Avoid Claude Opus for everyday work: OIT says it can cost roughly 10 times as much of your monthly allowance.</li>
+<li>Your usage shows at the top right as a circle with a percentage inside. If it gets close to 100%, save your work and wait for next month, or keep your requests shorter.</li>
+</ol>
+<p>The AI Hub keeps your data inside UT, but it is still not a place for passwords, other students' information, or anything you wouldn't want in a public repository. Follow UT's <a href="https://oit.utk.edu/ai/ai-matrix/">guidance chart for AI tools</a>.</p>
+<h3>Start every project with this request</h3>
+<p>Paste this at the start of a new chat, then describe what you want to build. It tells Claude to give you output you can copy straight into GitHub.</p>
+<pre><code>I am using a chat without access to my computer or GitHub. I will copy your output into GitHub by hand, using only the github.com website (no terminal, no git commands).
+
+For everything you build:
+1. Give me every file complete, never partial, each in its own code block, with the exact file name (and folder, if any) on the line above it.
+2. Keep a website to as few files as possible; a single index.html with the styling inside is best.
+3. After the files, give numbered steps for putting them on github.com: which repository, Add file &gt; Create new file, the exact file name to type, what to paste, and what to type in the commit message.
+4. If GitHub Pages is needed, include the steps to turn it on.
+5. When I ask for a change later, give me the whole updated file again, not just the changed lines.
+
+Here is what I want to build:</code></pre>
+<h3>Put Claude's output on GitHub</h3>
+<ol>
+<li>Make a repository if you don't have one (Part 1).</li>
+<li>For each file Claude gives you, click the copy button on its code block (or select all the text in the block and copy it).</li>
+<li>On github.com, open your repository and click <strong>Add file &gt; Create new file</strong>. Type the exact file name Claude gave (for example, <code>index.html</code>; for a folder, type <code>images/</code> and the folder appears). Paste the text and click <strong>Commit changes</strong>.</li>
+<li>To change a file later, open it on github.com, click the pencil icon (<strong>Edit this file</strong>), select everything, paste Claude's new full version, and click <strong>Commit changes</strong>.</li>
+<li>Turn on GitHub Pages (Part 1) to publish a website.</li>
+</ol>
+<p>To show Claude a file you already have, open it on github.com, click <strong>Raw</strong>, copy the text, and paste it into the chat. If the Hub lets you attach files in the chat, you can attach it instead.</p>
+<h3>Let GitHub do the building</h3>
+<p>For anything bigger than a file or two, pasting gets tedious. Ask Claude in the AI Hub to write a request for GitHub's own assistant instead, then follow Part 6 to hand it over:</p>
+<pre><code>Don't write the code yourself. Instead, write a clear request I can give to GitHub Copilot's coding agent to build this in my repository YOUR-USERNAME/REPOSITORY-NAME. Include what to build, which files to create or change, what it should look like, and how I will know it is finished. Put the request in one code block so I can copy it.</code></pre>
+
+<h2>Part 6: Asking GitHub to build things (GitHub Copilot)</h2>
+<p>GitHub has its own AI assistant, GitHub Copilot. Its cloud agent can take a written request, make the changes in your repository, and open a pull request for you to review: the same result Claude Code on the web gives, but started from github.com. This is the easiest way to turn a request written in the UT AI Hub into real files, and it works with requests written by any Claude tool.</p>
+<h3>Get Copilot</h3>
+<div class="table-wrap" role="region" tabindex="0" aria-label="GitHub Copilot plans and whether each can build things in your repository"><table>
+<caption>GitHub Copilot plans and whether each can build things in your repository</caption>
+<thead><tr><th scope="col">Copilot plan</th><th scope="col">Cost</th><th scope="col">Can it build things in your repository?</th></tr></thead>
+<tbody>
+<tr><td>Copilot Student</td><td>Free for verified students</td><td>Yes: includes Copilot in the cloud (the agent)</td></tr>
+<tr><td>Copilot Free</td><td>Free for anyone</td><td>No: chat only; you copy its answers in yourself</td></tr>
+<tr><td>Copilot Pro and above</td><td>Paid</td><td>Yes</td></tr>
+</tbody>
+</table></div>
+<p>To get Copilot Student:</p>
+<ol>
+<li>Go to <a href="https://github.com/settings/education/benefits">github.com/settings/education/benefits</a>. Click <strong>Start an application</strong> and verify that you are a student (use your UT email; GitHub may ask for proof of enrollment).</li>
+<li>Once approved, under <strong>Free GitHub developer resources for students and teachers</strong>, click <strong>Learn more</strong> and follow the prompts to activate Copilot Student.</li>
+<li>Approval can take several days. If you see only paid options at <a href="https://github.com/settings/copilot">github.com/settings/copilot</a>, don't buy anything: wait a few days and check again.</li>
+</ol>
+<p>GitHub's plans change often. Check the <a href="https://docs.github.com/en/copilot/get-started/plans">Copilot plans page</a> if something here doesn't match.</p>
+<h3>Give Copilot a task</h3>
+<ol>
+<li>On github.com, open your repository and click the <strong>Agents</strong> tab (or go to <a href="https://github.com/copilot">github.com/copilot</a>).</li>
+<li>Check that your repository is selected in the prompt box.</li>
+<li>Paste your request (for example, the one Claude wrote for you in Part 5). End it with <code>Open a pull request with the changes.</code></li>
+<li>Leave the environment on <strong>Cloud</strong> and click <strong>Start task</strong>.</li>
+<li>Copilot works for a few minutes; you can watch its progress or leave the page.</li>
+</ol>
+<p>You can also assign an existing issue to Copilot: open the issue, click <strong>Assignees</strong>, and choose <strong>Copilot</strong>.</p>
+<h3>Review and merge Copilot's work</h3>
+<ol>
+<li>When Copilot finishes, it opens a pull request and asks you to review it. Open it from the <strong>Pull requests</strong> tab.</li>
+<li>Click <strong>Files changed</strong> to see exactly what it did.</li>
+<li>Want changes? Write a comment on the pull request starting with <code>@copilot</code>, such as <code>@copilot make the quotation larger</code>, and it will update the pull request.</li>
+<li>When you're happy, click <strong>Merge pull request</strong>, then <strong>Confirm merge</strong>. If GitHub Pages is on, your site updates in a minute or two.</li>
+</ol>
+<p>Check facts and quotations yourself before you merge. Copilot, like Claude, can get them wrong, and you are responsible for what you publish.</p>
+<h3>A good request</h3>
+<p>The clearer the request, the better the result. Whether you or Claude writes it, include:</p>
+<ul>
+<li><strong>What</strong> to build, in a sentence.</li>
+<li><strong>Which files</strong> to create or change (for example, <code>index.html</code> in the top level).</li>
+<li><strong>What it should look like or do</strong>, with specifics (colors, sections, wording).</li>
+<li><strong>How you'll know it's done</strong> (for example, "the page opens on a phone without sideways scrolling").</li>
+<li><strong>What not to touch</strong> (for example, "don't change any other files").</li>
+</ul>
+
+<h2>Troubleshooting</h2>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Common problems by tool, and how to fix them"><table>
+<caption>Common problems by tool, and how to fix them</caption>
+<thead><tr><th scope="col">Tool</th><th scope="col">Problem</th><th scope="col">Fix</th></tr></thead>
+<tbody>
+<tr><td>Any</td><td>The github.io address shows "404"</td><td>Wait two minutes and refresh; check that Pages is on and <code>index.html</code> is in the top level of the repository</td></tr>
+<tr><td>Any</td><td>My changes aren't on my computer</td><td>Changes made on GitHub reach your computer only after <strong>Fetch origin</strong>, then <strong>Pull origin</strong> in GitHub Desktop</td></tr>
+<tr><td>Claude Code</td><td><code>gh: command not found</code></td><td>Repeat the Git and GitHub CLI install, then close and reopen the terminal</td></tr>
+<tr><td>Claude Code</td><td><code>git push</code> asks for a password</td><td>Run <code>gh auth setup-git</code>, then try again</td></tr>
+<tr><td>Claude Code</td><td>"Please tell me who you are" when committing</td><td>Run the two <code>git config</code> commands in Part 2</td></tr>
+<tr><td>Cowork</td><td>GitHub Desktop shows no changes</td><td>Check that GitHub Desktop's <strong>Current repository</strong> is your course folder</td></tr>
+<tr><td>Claude Code on the web</td><td>My repository isn't in the list</td><td>Add it to the Claude GitHub App (Part 4, Changing access later), then reload claude.ai/code</td></tr>
+<tr><td>Claude Code on the web</td><td>"403" error when pushing</td><td>The app isn't installed on that repository: add it, then ask Claude to push again</td></tr>
+<tr><td>UT AI Hub</td><td>Claude gave only part of a file</td><td>Ask: "Give me the whole file again, complete, in one code block."</td></tr>
+<tr><td>UT AI Hub</td><td>The page looks broken after pasting</td><td>Check that you pasted the whole file and the file name ends in <code>.html</code>; paste the file back to Claude and ask what's wrong</td></tr>
+<tr><td>UT AI Hub</td><td>Usage circle near 100%</td><td>Switch to Claude Sonnet, keep requests short, or wait for next month</td></tr>
+<tr><td>Copilot</td><td>No <strong>Agents</strong> tab, or Copilot isn't in <strong>Assignees</strong></td><td>Your account doesn't have Copilot Student (or another plan with the agent) yet; check github.com/settings/copilot</td></tr>
+<tr><td>Copilot</td><td>The pull request isn't what I wanted</td><td>Comment <code>@copilot</code> with what to change, or close the pull request without merging and start over</td></tr>
+</tbody>
+</table></div>
+<p>Never paste passwords, API keys, or other students' information into any AI tool or repository.</p>
+
+<h2>Sources</h2>
+<p>GitHub steps for Claude Code, Cowork, and Claude Code on the web come from the three earlier class guides (<a href="https://hilaryhavens.github.io/claude-code-setup-guide/">Claude Code</a>, <a href="https://hilaryhavens.github.io/cowork-setup-guide/">Cowork</a>, <a href="https://hilaryhavens.github.io/claude-code-web-setup-guide/">Claude Code on the web</a>). Pages below were checked November 11, 2026.</p>
+<ul>
+<li><a href="https://oit.utk.edu/ai/aihub/">Get started with UT AI Hub</a> and <a href="https://oit.utk.edu/ai/aihub/aihub-guide/">UT AI Hub Guide</a> (OIT; who can use it, sign-in, models, usage display)</li>
+<li><a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-students">Access GitHub Copilot for free as a student</a> (GitHub Docs)</li>
+<li><a href="https://docs.github.com/en/copilot/get-started/plans">Plans for GitHub Copilot</a> (GitHub Docs; plan features partly checked)</li>
+<li><a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/use-cloud-agent-on-github">Using Copilot cloud agent on GitHub</a> (GitHub Docs; Agents tab, issue assignment, review)</li>
+</ul>
+
+</main>
+</body>
+</html>
